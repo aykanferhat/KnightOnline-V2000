@@ -3727,13 +3727,13 @@ void CGameProcMain::InitUI()
 	if(NULL == pTbl) return;
 	
 	m_pUICmd->Init(s_pUIMgr);
-	m_pUICmd->LoadFromFile(pTbl->Co_Cmd_us);
+	m_pUICmd->LoadFromFile(pTbl->ka_Cmd);
 	rc = m_pUICmd->GetRegion();
 	m_pUICmd->SetPos((iW - (rc.right - rc.left))/2, iH - (rc.bottom - rc.top));
 	m_pUICmd->SetStyle(UISTYLE_FOCUS_UNABLE | UISTYLE_HIDE_UNABLE);
 
 	m_pUIChatDlg->Init(s_pUIMgr);					//Manager 자식으로 리스트에 추가 
-	m_pUIChatDlg->LoadFromFile(pTbl->co_chatting_box_us);
+	m_pUIChatDlg->LoadFromFile(pTbl->ka_chat_small);
 	rc = m_pUIChatDlg->GetRegion();
 	RECT rcCmd = m_pUICmd->GetRegion(); rcCmd.top += 5; // .. 하드 코딩..
 	iX = 0;
@@ -3743,18 +3743,18 @@ void CGameProcMain::InitUI()
 	m_pUIChatDlg->SetVisibleWithNoSound(true);
 
 	m_pUIChatDlg2->Init(s_pUIMgr);
-	m_pUIChatDlg2->LoadFromFile(pTbl->Co_chat_small_us);
+	m_pUIChatDlg2->LoadFromFile(pTbl->ka_chat_small);
 	m_pUIChatDlg2->SetStyle(UISTYLE_FOCUS_UNABLE | UISTYLE_HIDE_UNABLE);
 	m_pUIChatDlg2->SetVisibleWithNoSound(false);
 
 	m_pUIMsgDlg->Init(s_pUIMgr);
-	m_pUIMsgDlg->LoadFromFile(pTbl->co_information_box_us);
+	m_pUIMsgDlg->LoadFromFile(pTbl->ka_msgoutput_small);
 	CGameProcedure::UIPostData_Read(UI_POST_WND_INFO, m_pUIMsgDlg, rc.right, rc.top);
 	m_pUIMsgDlg->SetStyle(UISTYLE_FOCUS_UNABLE | UISTYLE_HIDE_UNABLE);
 	m_pUIMsgDlg->SetVisibleWithNoSound(true);
 
 	m_pUIMsgDlg2->Init(s_pUIMgr);
-	m_pUIMsgDlg2->LoadFromFile(pTbl->Co_msgoutput_small_us);
+	m_pUIMsgDlg2->LoadFromFile(pTbl->ka_msgoutput_small);
 	m_pUIMsgDlg2->SetStyle(UISTYLE_FOCUS_UNABLE | UISTYLE_HIDE_UNABLE);
 	m_pUIMsgDlg2->SetVisibleWithNoSound(false);
 
@@ -3762,7 +3762,7 @@ void CGameProcMain::InitUI()
 	m_pUIMsgDlg->MoveOffset(0, -1);
 
 	m_pUIStateBarAndMiniMap->Init(s_pUIMgr);
-	m_pUIStateBarAndMiniMap->LoadFromFile(pTbl->Co_StateBar_us);
+	//m_pUIStateBarAndMiniMap->LoadFromFile(pTbl->co_StateBar);
 	m_pUIStateBarAndMiniMap->SetStyle(UISTYLE_FOCUS_UNABLE | UISTYLE_HIDE_UNABLE);
 #ifdef _DEBUG
 	m_pUIStateBarAndMiniMap->SetPos(0, 70);
@@ -3771,29 +3771,29 @@ void CGameProcMain::InitUI()
 #endif
 
 	m_pUIVar->Init(s_pUIMgr);
-	m_pUIVar->LoadFromFile(pTbl->Co_Various_frame_us);
+	m_pUIVar->LoadFromFile(pTbl->re_Various_frame);
 	m_pUIVar->SetVisibleWithNoSound(false);
-	m_pUIVar->m_pPageState->LoadFromFile(pTbl->Co_Page_State_us);
+	m_pUIVar->m_pPageState->LoadFromFile(pTbl->re_Page_State);
 	m_pUIVar->m_pPageState->SetVisibleWithNoSound(true);
-	m_pUIVar->m_pPageKnights->LoadFromFile(pTbl->Co_Page_clan_us);
+	m_pUIVar->m_pPageKnights->LoadFromFile(pTbl->co_Page_clan);
 	m_pUIVar->m_pPageKnights->SetVisibleWithNoSound(false);
-	m_pUIVar->m_pPageFriends->LoadFromFile(pTbl->Co_Page_Friends_us);
+	m_pUIVar->m_pPageFriends->LoadFromFile(pTbl->re_Page_Friends);
 	m_pUIVar->m_pPageFriends->SetVisibleWithNoSound(false);
 	m_pUIVar->SetStyle(m_pUIVar->GetStyle() | UISTYLE_POS_LEFT);
 
 	// TODO(srmeier): need to implement this
-	m_pUIVar->m_pPageQuest->LoadFromFile(pTbl->Co_Page_Quest_us);
+	m_pUIVar->m_pPageQuest->LoadFromFile(pTbl->ka_Page_Quest);
 	m_pUIVar->m_pPageQuest->SetVisibleWithNoSound(false);
 	
 	m_pUITargetBar->Init(s_pUIMgr);
-	m_pUITargetBar->LoadFromFile(pTbl->co_TargetBar_us);
+	m_pUITargetBar->LoadFromFile(pTbl->co_TargetBar);
 	m_pUITargetBar->SetStyle(UISTYLE_FOCUS_UNABLE | UISTYLE_HIDE_UNABLE);
 	rc = m_pUITargetBar->GetRegion();
 	m_pUITargetBar->SetPos((iW - (rc.right - rc.left))/2, 0);
 	m_pUITargetBar->SetVisibleWithNoSound(false);
 
 	m_pUIHelp->Init(s_pUIMgr);
-	m_pUIHelp->LoadFromFile(pTbl->Co_Help_us);
+	m_pUIHelp->LoadFromFile(pTbl->co_Help);
 	CGameProcedure::UIPostData_Read(UI_POST_WND_HELP, m_pUIHelp, 0, 0);
 	rc = m_pUIHelp->GetRegion();
 	iX = (iW - (rc.right - rc.left))/2;
@@ -3802,11 +3802,11 @@ void CGameProcMain::InitUI()
 //	m_pUIHelp->SetStyle(UISTYLE_SHOW_ME_ALONE);
 	
 	m_pUINotice->Init(s_pUIMgr);
-	m_pUINotice->LoadFromFile(pTbl->Co_Notice_us);
+	m_pUINotice->LoadFromFile(pTbl->re_notice);
 	m_pUINotice->SetVisibleWithNoSound(false);
 
 	m_pUIClassChange->Init(s_pUIMgr);
-	m_pUIClassChange->LoadFromFile(pTbl->co_changeclass_us);
+	m_pUIClassChange->LoadFromFile(pTbl->co_changeclass);
 	m_pUIClassChange->SetVisibleWithNoSound(false);
 	rc = m_pUIClassChange->GetRegion();
 	iX = (iW - (rc.right - rc.left))/2;
@@ -3815,7 +3815,7 @@ void CGameProcMain::InitUI()
 	m_pUIClassChange->SetStyle(UISTYLE_USER_MOVE_HIDE);
 
 	m_pUINpcChange->Init(s_pUIMgr);
-	m_pUINpcChange->LoadFromFile(pTbl->co_change_us);
+	m_pUINpcChange->LoadFromFile(pTbl->co_change);
 	m_pUINpcChange->SetVisibleWithNoSound(false);
 	rc = m_pUINpcChange->GetRegion();
 	iX = (iW - (rc.right - rc.left))/2;
@@ -3824,7 +3824,7 @@ void CGameProcMain::InitUI()
 	m_pUINpcChange->SetStyle(UISTYLE_SHOW_ME_ALONE | UISTYLE_USER_MOVE_HIDE);
 
 	m_pUINpcEvent->Init(s_pUIMgr);
-	m_pUINpcEvent->LoadFromFile(pTbl->co_smith_us);
+	m_pUINpcEvent->LoadFromFile(pTbl->co_smith);
 	m_pUINpcEvent->SetVisibleWithNoSound(false);
 	m_pUINpcEvent->SetStyle(UISTYLE_SHOW_ME_ALONE | UISTYLE_USER_MOVE_HIDE);
 	rc = m_pUINpcEvent->GetRegion();
@@ -3833,7 +3833,7 @@ void CGameProcMain::InitUI()
 	m_pUINpcEvent->SetPos(iX, iY);
 
 	m_pUINpcTalk->Init(s_pUIMgr);
-	m_pUINpcTalk->LoadFromFile(pTbl->co_talk_us);
+	m_pUINpcTalk->LoadFromFile(pTbl->co_talk);
 	m_pUINpcTalk->SetVisibleWithNoSound(false);
 	rc = m_pUINpcTalk->GetRegion();
 	iX = (iW - (rc.right - rc.left))/2;
@@ -3841,7 +3841,7 @@ void CGameProcMain::InitUI()
 	m_pUINpcTalk->SetPos(iX, iY);
 
 	m_pUIWarp->Init(s_pUIMgr);
-	m_pUIWarp->LoadFromFile(pTbl->Co_Warp_us);
+	m_pUIWarp->LoadFromFile(pTbl->re_warp);
 	m_pUIWarp->SetVisibleWithNoSound(false);
 	rc = m_pUIWarp->GetRegion();
 	iX = (iW - (rc.right - rc.left))/2;
@@ -3858,7 +3858,7 @@ void CGameProcMain::InitUI()
 //	m_pUITradeList->SetPos(iX, iY);
 
 	m_pUIItemREDlg->Init(s_pUIMgr);
-	m_pUIItemREDlg->LoadFromFile(pTbl->Co_change_us);
+	m_pUIItemREDlg->LoadFromFile(pTbl->co_change);
 	m_pUIItemREDlg->SetVisibleWithNoSound(false);
 	rc = m_pUIItemREDlg->GetRegion();
 	iX = (iW - (rc.right - rc.left))/2;
@@ -3869,13 +3869,13 @@ void CGameProcMain::InitUI()
 	m_pUIItemREDlg->SetState(UI_STATE_COMMON_NONE);
 
 	m_pUIRepairTooltip->Init(s_pUIMgr);
-	m_pUIRepairTooltip->LoadFromFile(pTbl->Co_tooltop_repair_us);
+	m_pUIRepairTooltip->LoadFromFile(pTbl->co_tooltop_repair);
 	m_pUIRepairTooltip->SetVisibleWithNoSound(false);
 	m_pUIRepairTooltip->InitPos();
 	m_pUIRepairTooltip->SetStyle(UISTYLE_ALWAYSTOP|UISTYLE_FOCUS_UNABLE);
 
 	m_pUIPartyOrForce->Init(s_pUIMgr);
-	m_pUIPartyOrForce->LoadFromFile(pTbl->Co_Party_us);
+	m_pUIPartyOrForce->LoadFromFile(pTbl->re_Party);
 	m_pUIPartyOrForce->SetStyle(UISTYLE_HIDE_UNABLE);
 	rc = m_pUIPartyOrForce->GetRegion();
 	iX = iW - (rc.right - rc.left);
@@ -3885,7 +3885,7 @@ void CGameProcMain::InitUI()
 
 	// Dropped Item Dlg.. 
 	m_pUIDroppedItemDlg->Init(s_pUIMgr);
-	m_pUIDroppedItemDlg->LoadFromFile(pTbl->co_DroppedItem_us);
+	m_pUIDroppedItemDlg->LoadFromFile(pTbl->re_DroppedItem);
 	m_pUIDroppedItemDlg->SetVisibleWithNoSound(false);
 	m_pUIDroppedItemDlg->InitIconWnd(UIWND_DROPITEM);
 	m_pUIDroppedItemDlg->SetUIType(UI_TYPE_ICON_MANAGER);
@@ -3893,7 +3893,7 @@ void CGameProcMain::InitUI()
 	m_pUIDroppedItemDlg->SetStyle(m_pUIDroppedItemDlg->GetStyle() | UISTYLE_USER_MOVE_HIDE);
 
 	m_pUITransactionDlg->Init(s_pUIMgr);
-	m_pUITransactionDlg->LoadFromFile(pTbl->Co_Transaction_us);
+	m_pUITransactionDlg->LoadFromFile(pTbl->re_Transaction);
 	rc = m_pUITransactionDlg->GetRegion();
 	m_pUITransactionDlg->SetPos(iW - (rc.right-rc.left), 10);
 	m_pUITransactionDlg->SetVisibleWithNoSound(false);
@@ -3905,7 +3905,7 @@ void CGameProcMain::InitUI()
 	m_pSubProcPerTrade->InitPerTradeDlg(s_pUIMgr);
 
 	m_pUIInventory->Init(s_pUIMgr);
-	m_pUIInventory->LoadFromFile(pTbl->Co_Inventory_us);
+	m_pUIInventory->LoadFromFile(pTbl->re_Inventory);
 	m_pUIInventory->SetVisibleWithNoSound(false);
 	m_pUIInventory->SetPos(465,10);
 	m_pUIInventory->InitIconWnd(UIWND_INVENTORY);
@@ -3916,7 +3916,7 @@ void CGameProcMain::InitUI()
 	// Countable Item Edit Dlg..
 	CN3UIWndBase::m_pCountableItemEdit = new CCountableItemEditDlg;
 	CN3UIWndBase::m_pCountableItemEdit->Init(s_pUIMgr);
-	CN3UIWndBase::m_pCountableItemEdit->LoadFromFile(pTbl->Co_PersonalTradeEdit_us);
+	CN3UIWndBase::m_pCountableItemEdit->LoadFromFile(pTbl->ka_PersonalTradeEdit);
 	CN3UIWndBase::m_pCountableItemEdit->SetStyle(UISTYLE_ALWAYSTOP);
 
 	rc = CN3UIWndBase::m_pCountableItemEdit->GetRegion();
@@ -3928,7 +3928,7 @@ void CGameProcMain::InitUI()
 	CN3UIWndBase::m_pCountableItemEdit->SetState(UI_STATE_COMMON_NONE);
 
 	m_pUISkillTreeDlg->Init(s_pUIMgr);
-	m_pUISkillTreeDlg->LoadFromFile(pTbl->Co_SkillTree_us);
+	m_pUISkillTreeDlg->LoadFromFile(pTbl->ka_SkillTree);
 	m_pUISkillTreeDlg->SetVisibleWithNoSound(false);
 	rc = m_pUISkillTreeDlg->GetRegion();
 	m_pUISkillTreeDlg->SetPos(iW - (rc.right-rc.left), 10);
@@ -3939,7 +3939,7 @@ void CGameProcMain::InitUI()
 
 
 	m_pUICmdListDlg->Init(s_pUIMgr);
-	m_pUICmdListDlg->LoadFromFile(pTbl->Co_CmdList_us);
+	m_pUICmdListDlg->LoadFromFile(pTbl->re_CmdList);
 	m_pUICmdListDlg->SetVisibleWithNoSound(false);
 	rc = m_pUICmdListDlg->GetRegion();
 	m_pUICmdListDlg->SetPos(iW - (rc.right - rc.left), 10);
@@ -3948,7 +3948,7 @@ void CGameProcMain::InitUI()
 	m_pUICmdListDlg->SetStyle(m_pUISkillTreeDlg->GetStyle() | UISTYLE_POS_RIGHT);
 
 	m_pUICmdEditDlg->Init(s_pUIMgr);
-	m_pUICmdEditDlg->LoadFromFile(pTbl->co_CmdEdit_us);
+	m_pUICmdEditDlg->LoadFromFile(pTbl->co_CmdEdit);
 	m_pUICmdEditDlg->SetVisibleWithNoSound(false);
 	rc = m_pUICmdEditDlg->GetRegion();
 	iX = (iW - (rc.right - rc.left)) / 2;
@@ -3959,7 +3959,7 @@ void CGameProcMain::InitUI()
 	// default ui pos
 	rc = m_pUIStateBarAndMiniMap->GetRegion();
 	m_pUIHotKeyDlg->Init(s_pUIMgr);
-	m_pUIHotKeyDlg->LoadFromFile(pTbl->co_HotKey_us);
+	m_pUIHotKeyDlg->LoadFromFile(pTbl->re_HotKey);
 	m_pUIHotKeyDlg->SetStyle(UISTYLE_HIDE_UNABLE);
 	CGameProcedure::UIPostData_Read(UI_POST_WND_HOTKEY, m_pUIHotKeyDlg, rc.left, rc.bottom);
 	m_pUIHotKeyDlg->SetVisibleWithNoSound(true);
@@ -3968,11 +3968,11 @@ void CGameProcMain::InitUI()
 	m_pUIHotKeyDlg->SetState(UI_STATE_COMMON_NONE);
 
 	m_pUIKnightsOp->Init(s_pUIMgr);
-	m_pUIKnightsOp->LoadFromFile(pTbl->co_KnightsOperation_us);
+	m_pUIKnightsOp->LoadFromFile(pTbl->co_KnightsOperation);
 	m_pUIKnightsOp->SetVisibleWithNoSound(false);
 
 	m_pUIPartyBBS->Init(s_pUIMgr);
-	m_pUIPartyBBS->LoadFromFile(pTbl->Co_PartyBoard_us);//, N3FORMAT_VER_1298);
+	m_pUIPartyBBS->LoadFromFile(pTbl->re_PartyBoard);//, N3FORMAT_VER_1298);
 	m_pUIPartyBBS->SetVisibleWithNoSound(false);
 	rc = m_pUIPartyBBS->GetRegion();
 	iX = (iW - (rc.right - rc.left))/2;
@@ -3981,7 +3981,7 @@ void CGameProcMain::InitUI()
 
 
 	m_pUIWareHouseDlg->Init(s_pUIMgr);
-	m_pUIWareHouseDlg->LoadFromFile(pTbl->Co_WareHouse_us);
+	m_pUIWareHouseDlg->LoadFromFile(pTbl->re_WareHouse);
 	rc = m_pUIWareHouseDlg->GetRegion();
 	m_pUIWareHouseDlg->SetPos(iW - (rc.right-rc.left), 10);
 	m_pUIWareHouseDlg->SetVisibleWithNoSound(false);
@@ -3993,7 +3993,7 @@ void CGameProcMain::InitUI()
 	m_pTargetSymbol->LoadFromFile(pTbl->Co_TargetSymbol); // 플레이어가 타겟으로 잡은 캐릭터의 위치위에 그리면 된다..
 
 	m_pUIInn->Init(s_pUIMgr);
-	m_pUIInn->LoadFromFile(pTbl->co_inn_us);
+	m_pUIInn->LoadFromFile(pTbl->co_inn);
 	m_pUIInn->SetVisibleWithNoSound(false);
 	m_pUIInn->SetStyle(UISTYLE_SHOW_ME_ALONE | UISTYLE_USER_MOVE_HIDE);
 	rc = m_pUIInn->GetRegion();
@@ -4002,7 +4002,7 @@ void CGameProcMain::InitUI()
 	m_pUIInn->SetPos(iX, iY);
 	
 	m_pUICreateClanName->Init(s_pUIMgr);
-	m_pUICreateClanName->LoadFromFile(pTbl->co_creat_clan_us);
+	m_pUICreateClanName->LoadFromFile(pTbl->co_creat_clan);
 	m_pUICreateClanName->SetVisibleWithNoSound(false);
 	rc = m_pUICreateClanName->GetRegion();
 	iX = (iW - (rc.right - rc.left))/2;
@@ -4012,13 +4012,13 @@ void CGameProcMain::InitUI()
 
 	// Quest Menu
 	m_pUIQuestMenu->Init(s_pUIMgr);
-	m_pUIQuestMenu->LoadFromFile(pTbl->co_QuestMenu_us);
+	m_pUIQuestMenu->LoadFromFile(pTbl->co_QuestMenu);
 	m_pUIQuestMenu->SetVisibleWithNoSound(false);
 	m_pUIQuestMenu->SetStyle(UISTYLE_USER_MOVE_HIDE);
 
 	// Quest Talk
 	m_pUIQuestTalk->Init(s_pUIMgr);
-	m_pUIQuestTalk->LoadFromFile(pTbl->co_QuestTalk_us);
+	m_pUIQuestTalk->LoadFromFile(pTbl->co_QuestTalk);
 	m_pUIQuestTalk->SetVisibleWithNoSound(false);
 	m_pUIQuestTalk->SetStyle(UISTYLE_USER_MOVE_HIDE);
 	rc = m_pUIQuestTalk->GetRegion();
@@ -4028,7 +4028,7 @@ void CGameProcMain::InitUI()
 
 	// dead ui
 	m_pUIDead->Init(s_pUIMgr);
-	m_pUIDead->LoadFromFile(pTbl->co_Dead_us);
+	m_pUIDead->LoadFromFile(pTbl->co_Dead);
 	m_pUIDead->SetVisibleWithNoSound(false);
 	rc = m_pUIDead->GetRegion();
 	iX = (iW - (rc.right - rc.left))/2;
@@ -4038,7 +4038,7 @@ void CGameProcMain::InitUI()
 
 	// 상거래 게시판
 	m_pUITradeBBS->Init(s_pUIMgr);
-	m_pUITradeBBS->LoadFromFile(pTbl->Co_saleboard_us);
+	m_pUITradeBBS->LoadFromFile(pTbl->ka_saleboard);
 	m_pUITradeBBS->SetVisibleWithNoSound(false);
 	m_pUITradeBBS->SetStyle(UISTYLE_USER_MOVE_HIDE);
 	rc = m_pUITradeBBS->GetRegion();
@@ -4048,7 +4048,7 @@ void CGameProcMain::InitUI()
 
 	// 상거래 종류 선택 
 	m_pUITradeBBSSelector->Init(s_pUIMgr);
-	m_pUITradeBBSSelector->LoadFromFile(pTbl->co_saleboardselection_us);
+	m_pUITradeBBSSelector->LoadFromFile(pTbl->co_saleboardselection);
 	m_pUITradeBBSSelector->SetVisibleWithNoSound(false);
 	rc = m_pUITradeBBSSelector->GetRegion();
 	iX = (iW - (rc.right - rc.left))/2;
@@ -4057,7 +4057,7 @@ void CGameProcMain::InitUI()
 	m_pUITradeBBSSelector->SetStyle(UISTYLE_USER_MOVE_HIDE);
 
 	// 상거래 항목 내용
-	m_pUITradeBBSEdit->LoadFromFile(pTbl->co_saleboardmemo_us);
+	m_pUITradeBBSEdit->LoadFromFile(pTbl->co_saleboardmemo);
 	m_pUITradeBBSEdit->SetVisibleWithNoSound(false);
 	rc = m_pUITradeBBSEdit->GetRegion();
 	iX = (iW - (rc.right - rc.left))/2;
@@ -4315,7 +4315,7 @@ void CGameProcMain::InitZone(int iZone, const __Vector3& vPosPlayer)
 		CLogWriter::Write("%d->szTerrainFN.c_str()",pZoneData); // TmpLog1122
 		//char szBuf[256];
 		char szFName[_MAX_PATH];
-		_splitpath(pZoneData->szTerrainFN.c_str(), NULL, NULL, szFName, NULL);
+		_splitpath(pZoneData->sTerrainFN.c_str(), NULL, NULL, szFName, NULL);
 		char szFName2[_MAX_PATH];
 		char szFullPathName[_MAX_PATH];
 		sprintf(szFName2,"%s_Bird",szFName);

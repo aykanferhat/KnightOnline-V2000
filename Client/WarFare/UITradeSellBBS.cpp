@@ -90,7 +90,7 @@ bool CUITradeSellBBS::Load(HANDLE hFile)
 	_TBL_TABLE_UI*	pTblUI	= NULL;
 	pTblUI = CGameBase::file_Tbl_UI.Find(NATION_ELMORAD);
 
-	m_MsgBox.LoadFromFile(pTblUI->Co_MessageBox_us);
+	m_MsgBox.LoadFromFile(pTblUI->re_MessageBox);
 
 	RECT rt = m_MsgBox.GetRegion();
 	POINT pt;
@@ -98,7 +98,7 @@ bool CUITradeSellBBS::Load(HANDLE hFile)
 	pt.y = (CN3Base::s_CameraData.vp.Height - (rt.bottom - rt.top)) / 2;
 	m_MsgBox.SetPos(pt.x, pt.y);
 
-	m_UIExplanation.LoadFromFile(pTblUI->co_saleboardmemolist_us);
+	m_UIExplanation.LoadFromFile(pTblUI->co_saleboardmemolist);
 
 	rt = m_UIExplanation.GetRegion();
 	pt.x = (CN3Base::s_CameraData.vp.Width - (rt.right - rt.left)) / 2;

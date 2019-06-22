@@ -3,7 +3,7 @@
 
 #if _MSC_VER > 1000
 #pragma once
-#endif 
+#endif // _MSC_VER > 1000
 
 #pragma warning(disable : 4786)
 
@@ -75,4 +75,4 @@ private:
 	int m_size;
 };
 
-#endif
+#endif // !defined(AFX_Bitset_h__INCLUDED_)

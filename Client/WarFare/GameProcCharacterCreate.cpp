@@ -44,7 +44,7 @@ void CGameProcCharacterCreate::Init()
 	_TBL_TABLE_UI* pTblUI = file_Tbl_UI.Find(s_pPlayer->m_InfoBase.eNation);
 	m_pUICharacterCreate = new CUICharacterCreate();
 	m_pUICharacterCreate->Init(s_pUIMgr);
-	if(pTblUI) m_pUICharacterCreate->LoadFromFile(pTblUI->Co_CharacterCreate_us);
+	if(pTblUI) m_pUICharacterCreate->LoadFromFile(pTblUI->re_CharacterCreate);
 }
 
 void CGameProcCharacterCreate::Render()

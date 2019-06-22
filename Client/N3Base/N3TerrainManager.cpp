@@ -72,7 +72,7 @@ void CN3TerrainManager::InitWorld(int iZoneID, const __Vector3& vPosPlayer)
 	CLogWriter::Write("CN3TerrainManager::InitWorld Pre Load\t%d", m_pTerrain); // TmpLog_11_22
 
 	/*if(iZoneID == 1) m_pTerrain->LoadFromFile(pZone->szTerrainFN, N3FORMAT_VER_1068);//N3FORMAT_VER_1298);//pZone->dwVersion);
-	else*/ m_pTerrain->LoadFromFile(pZone->szTerrainFN);//, N3FORMAT_VER_1298);
+	else*/ m_pTerrain->LoadFromFile(pZone->sTerrainFN);//, N3FORMAT_VER_1298);
 
 	CLogWriter::Write("CN3TerrainManager::InitWorld Pre Load ColorMap"); // TmpLog_11_22
 	m_pTerrain->LoadColorMap(pZone->szColorMapFN);		// 컬러맵 로드..
@@ -85,7 +85,7 @@ void CN3TerrainManager::InitWorld(int iZoneID, const __Vector3& vPosPlayer)
 	else*/ m_pShapes->LoadFromFile(pZone->szObjectPostDataFN);//, N3FORMAT_VER_1298);//, pZone->dwVersion);	// 오브젝트 데이터 로드..
 	
 	char szFName[_MAX_PATH];
-	_splitpath(pZone->szTerrainFN.c_str(), NULL, NULL, szFName, NULL);
+	_splitpath(pZone->sTerrainFN.c_str(), NULL, NULL, szFName, NULL);
 	char szFName2[_MAX_PATH];
 	char szFullPathName[_MAX_PATH];
 	sprintf(szFName2,"%s_Bird",szFName);

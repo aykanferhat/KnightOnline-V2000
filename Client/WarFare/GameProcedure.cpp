@@ -41,7 +41,7 @@
 #include "MagicSkillMng.h"
 #include "GameCursor.h"
 
-#include "shared/Compression.h"
+#include "../shared/Compression.h"
 
 #ifdef _DEBUG
 #undef THIS_FILE
@@ -211,7 +211,7 @@ void CGameProcedure::StaticMemberInit(SDL_Window* pWindow)
 	s_pUIMgr = new CUIManager();
 	s_pMsgBoxMgr = new CUIMessageBoxManager(); //MessageBox Manager
 
-	CN3UIBase::EnableTooltip(pTblUI->Co_ToolTip_us);
+	CN3UIBase::EnableTooltip(pTblUI->co_ToolTip);
 
 	s_pProcLogIn			= new CGameProcLogIn();				
 	s_pProcNationSelect		= new CGameProcNationSelect();		
@@ -264,7 +264,7 @@ void CGameProcedure::StaticMemberRelease()
 		if(pTbl)
 		{
 			CUIEndingDisplay Credit;
-			Credit.LoadFromFile(pTbl->Co_EndMessage_us);
+			Credit.LoadFromFile(pTbl->co_EndMessage);
 			Credit.Render();
 		}
 	}
@@ -1041,16 +1041,16 @@ void CGameProcedure::LoadingUIChange(int iVictoryNation)
 	switch(iVictoryNation)
 	{
 	case VICTORY_ABSENCE:
-		szLoading = pTblUI->Co_Loading_us;
+		szLoading = pTblUI->co_Loading;
 		break;
 	case VICTORY_ELMORAD:
-		szLoading = pTblUI->Co_Elmorad_loading_us;
+		szLoading = pTblUI->Elmorad_loading;
 		break;
 	case VICTORY_KARUS:
-		szLoading = pTblUI->Co_Karus_loading_us;
+		szLoading = pTblUI->Karus_loading;
 		break;
 	default:
-		szLoading = pTblUI->Co_Loading_us;
+		szLoading = pTblUI->co_Loading;
 		break;
 	}
 

@@ -58,7 +58,7 @@ bool CUIDead::Load(HANDLE hFile)
 	_TBL_TABLE_UI*	pTblUI	= NULL;
 	pTblUI = CGameBase::file_Tbl_UI.Find(NATION_ELMORAD);
 
-	m_MsgBox.LoadFromFile(pTblUI->Co_MessageBox_us);
+	m_MsgBox.LoadFromFile(pTblUI->re_MessageBox);
 
 	RECT rt = m_MsgBox.GetRegion();
 	POINT pt;

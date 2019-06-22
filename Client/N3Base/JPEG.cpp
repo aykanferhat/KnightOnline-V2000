@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include <Windows.h>
-#include "shared/types.h"
+#include "../shared/types.h"
 
 #include "Jpeg.h"
 #include <math.h>

@@ -49,8 +49,11 @@ CUILogIn::~CUILogIn()
 
 bool CUILogIn::ReceiveMessage(CN3UIBase* pSender, uint32_t dwMsg)
 {
-	if (NULL == pSender) 
-		return false;
+	if (NULL == pSender) return false;
+
+	//s_CameraData.vp;  
+	//uint32_t mm = s_CameraData.vp.Height;
+	//uint32_t ss = s_CameraData.vp.Width;	
 
 	if (dwMsg == UIMSG_BUTTON_CLICK)
 	{
@@ -122,41 +125,44 @@ bool CUILogIn::ReceiveMessage(CN3UIBase* pSender, uint32_t dwMsg)
 
 bool CUILogIn::Load(HANDLE hFile)
 {
-	if (CN3UIBase::Load(hFile) == false) return false;
+	if (CN3UIBase::Load(hFile) == false) 
+		return false;
 
 	//PrintChildIDs();
 
 	m_pGroup_LogIn = GetChildByID("Group_LogIn");
-	__ASSERT(m_pGroup_LogIn, "NULL UI Component!!");
+	__ASSERT(m_pGroup_LogIn, "m_pGroup_LogIn NULL UI Component!!");
 
 	if (m_pGroup_LogIn)
 	{
 		m_pBtn_LogIn = (CN3UIButton*)m_pGroup_LogIn->GetChildByID("Btn_Login");		
 		__ASSERT(m_pBtn_LogIn, "m_pBtn_LogIn NULL UI Component!!");
-		
+
 		m_pBtn_Cancel = (CN3UIButton*)m_pGroup_LogIn->GetChildByID("Btn_Cancel");	
 		__ASSERT(m_pBtn_Cancel, "m_pBtn_Cancel NULL UI Component!!");
-		
+
 		m_pBtn_Option = (CN3UIButton*)m_pGroup_LogIn->GetChildByID("Btn_Option");	
 		__ASSERT(m_pBtn_Option, "m_pBtn_Option NULL UI Component!!");
-		
+
 		m_pBtn_Join = (CN3UIButton*)m_pGroup_LogIn->GetChildByID("Btn_Join");		
 		__ASSERT(m_pBtn_Join, "m_pBtn_Join NULL UI Component!!");
 
 		m_pEdit_id = (CN3UIEdit*)m_pGroup_LogIn->GetChildByID("Edit_ID");			
 		__ASSERT(m_pEdit_id, "m_pEdit_id NULL UI Component!!");
-		
+
 		m_pEdit_pw = (CN3UIEdit*)m_pGroup_LogIn->GetChildByID("Edit_PW");			
 		__ASSERT(m_pEdit_pw, "m_pEdit_pw NULL UI Component!!");
 
+		m_pImg_GradeLogo = m_pGroup_LogIn->GetChildByID("Img_Grade");	
+		__ASSERT(m_pImg_GradeLogo, "m_pImg_GradeLogo NULL UI Component!!");
 	}
 
 	m_pText_Rights = GetChildByID("Text_Rights");	
 	__ASSERT(m_pText_Rights, "m_pText_Rights NULL UI Component!!");
-	
+
 	m_pImg_MGameLogo = GetChildByID("Img_MGame");	
 	__ASSERT(m_pImg_MGameLogo, "m_pImg_MGameLogo NULL UI Component!!");
-	
+
 	m_pImg_DaumLogo = GetChildByID("Img_Daum");		
 	__ASSERT(m_pImg_DaumLogo, "m_pImg_DaumLogo NULL UI Component!!");
 
@@ -171,11 +177,12 @@ bool CUILogIn::Load(HANDLE hFile)
 
 	m_pGroup_ServerList = GetChildByID("Group_ServerList");		
 	__ASSERT(m_pGroup_ServerList, "m_pGroup_ServerList NULL UI Component!!");
+
 	if (m_pGroup_ServerList)
 	{
 		m_pList_Server = (CN3UIList*)(m_pGroup_ServerList->GetChildByID("List_Server"));	
 		__ASSERT(m_pList_Server, "m_pList_Server NULL UI Component!!");
-		
+
 		m_pBtn_Connect = (CN3UIButton*)m_pGroup_ServerList->GetChildByID("Btn_Connect");	
 		__ASSERT(m_pBtn_Connect, "m_pBtn_Connect NULL UI Component!!");
 
@@ -247,8 +254,7 @@ bool CUILogIn::ServerInfoAdd(const __GameServerInfo& GSI)
 
 bool CUILogIn::ServerInfoGet(size_t iIndex, __GameServerInfo& GSI)
 {
-	if (NULL == m_pList_Server
-		|| iIndex >= m_ListServerInfos.size())
+	if (NULL == m_pList_Server || iIndex >= m_ListServerInfos.size())
 		return false;
 
 	GSI = m_ListServerInfos[iIndex];
@@ -258,7 +264,8 @@ bool CUILogIn::ServerInfoGet(size_t iIndex, __GameServerInfo& GSI)
 bool CUILogIn::ServerInfoGetCur(__GameServerInfo& GSI)
 {
 	GSI.Init();
-	if (NULL == m_pList_Server) return false;
+	if (NULL == m_pList_Server) 
+		return false;
 
 	int iIndex = m_pList_Server->GetCurSel();
 	return this->ServerInfoGet(iIndex, GSI);
@@ -266,12 +273,12 @@ bool CUILogIn::ServerInfoGetCur(__GameServerInfo& GSI)
 
 void CUILogIn::ServerInfoUpdate()
 {
-	if (NULL == m_pList_Server) return;
+	if (NULL == m_pList_Server)
+		return;
 
 	m_pList_Server->ResetContent();
 	if (!m_ListServerInfos.empty())
 	{
-		//sort(m_ListServerInfos.begin(), m_ListServerInfos.end(), not2(__GameServerInfo()));
 		int iSize = m_ListServerInfos.size();
 		for (int i = 0; i < iSize; i++)
 		{
@@ -312,7 +319,8 @@ void CUILogIn::Tick()
 
 void CUILogIn::OpenServerList()
 {
-	if (m_bOpenningNow || NULL == m_pGroup_ServerList) return;
+	if (m_bOpenningNow || NULL == m_pGroup_ServerList) 
+		return;
 
 	m_pGroup_ServerList->SetVisible(true);
 	RECT rc = m_pGroup_ServerList->GetRegion();
@@ -379,7 +387,7 @@ void CUILogIn::SetVisibleLogInUIs(bool bEnable)
 
 void CUILogIn::RecalcGradePos()
 {
-	if (m_pImg_GradeLogo) // 이용등급 표시
+	if (m_pImg_GradeLogo)
 	{
 		RECT rc = m_pImg_GradeLogo->GetRegion();
 		int iX = s_CameraData.vp.Width - (rc.right - rc.left + 10);
@@ -409,8 +417,7 @@ bool CUILogIn::OnKeyPress(int iKey)
 		{
 		case SDL_SCANCODE_UP://DIK_UP:
 		{
-			if (NULL == m_pList_Server) 
-				return false;
+			if (NULL == m_pList_Server) return false;
 
 			int iIndex = m_pList_Server->GetCurSel();
 
@@ -420,8 +427,7 @@ bool CUILogIn::OnKeyPress(int iKey)
 		return true;
 		case SDL_SCANCODE_DOWN://DIK_DOWN:
 		{
-			if (NULL == m_pList_Server) 
-				return false;
+			if (NULL == m_pList_Server) return false;
 
 			int iIndex = m_pList_Server->GetCurSel();
 			int iCnt = m_pList_Server->GetCount();
@@ -435,6 +441,5 @@ bool CUILogIn::OnKeyPress(int iKey)
 			return true;
 		}
 	}
-
 	return CN3UIBase::OnKeyPress(iKey);
 }

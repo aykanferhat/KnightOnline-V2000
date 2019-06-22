@@ -1,9 +1,13 @@
+// UILogIn.h: interface for the CUILogIn class.
+//
+//////////////////////////////////////////////////////////////////////
+
 #if !defined(AFX_UILogIn_H__5D51312E_7B98_43C2_871B_12A9CC0C2096__INCLUDED_)
 #define AFX_UILogIn_H__5D51312E_7B98_43C2_871B_12A9CC0C2096__INCLUDED_
 
 #if _MSC_VER > 1000
 #pragma once
-#endif 
+#endif // _MSC_VER > 1000
 
 #include <string>
 #include <vector>
@@ -55,15 +59,15 @@ protected:
 	
 	std::vector<__GameServerInfo> m_ListServerInfos;
 
-	bool	m_bOpenningNow; 
+	bool	m_bOpenningNow; // 위에서 아래로 스르륵...열려야 한다면..
 	float 	m_fMoveDelta;
-	bool	m_bLogIn; 
+	bool	m_bLogIn; // 로그인 중복 방지..
 
 public:
 	void SetRequestedLogIn(bool bLogIn) { m_bLogIn = bLogIn; }
 	bool OnKeyPress(int iKey);
 	void RecalcGradePos();
-	void SetVisibleLogInUIs(bool bEnable); 
+	void SetVisibleLogInUIs(bool bEnable); // 계정 LogIn 에 필요한 UI 들을 숨긴다..
 	void OpenServerList();
 	void Tick();
 
@@ -71,7 +75,7 @@ public:
 	void FocusCircular();
 	void FocusToID();
 	bool Load(HANDLE hFile);
-	bool ReceiveMessage(CN3UIBase* pSender, uint32_t dwMsg); 
+	bool ReceiveMessage(CN3UIBase* pSender, uint32_t dwMsg); // 메시지를 받는다.. 보낸놈, msg
 
 	int		ServerInfoCount() { return m_ListServerInfos.size(); }
 	bool	ServerInfoAdd(const __GameServerInfo& GSI);
@@ -88,4 +92,4 @@ public:
 	virtual ~CUILogIn();
 };
 
-#endif 
+#endif // !defined(AFX_UILogIn_H__5D51312E_7B98_43C2_871B_12A9CC0C2096__INCLUDED_)

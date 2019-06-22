@@ -1,7 +1,7 @@
 #ifndef _JPEG_MODULE_BODY_
 #define _JPEG_MODULE_BODY_
 
-#include "shared/types.h"
+#include "../shared/types.h"
 
 struct SET
 {

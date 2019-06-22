@@ -33,7 +33,7 @@ std::string CUIMessageBoxManager::MessageBoxPost(const std::string& szMsg, const
 
 		pTblUI = CGameBase::file_Tbl_UI.Find(NATION_ELMORAD);
 
-		pMB->LoadFromFile(pTblUI->Co_MessageBox_us);
+		pMB->LoadFromFile(pTblUI->re_MessageBox);
 		pMB->SetVisible(false);
 		m_UBMs.insert(val_UBM(szMsg, pMB));
 	}

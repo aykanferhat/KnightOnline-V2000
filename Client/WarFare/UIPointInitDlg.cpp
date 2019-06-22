@@ -1,3 +1,7 @@
+// UIPointInitDlg.cpp: implementation of the UIPointInitDlg class.
+//
+//////////////////////////////////////////////////////////////////////
+
 //#include "stdafx.h"
 #include "resource.h"
 #include "UIPointInitDlg.h"
@@ -18,6 +22,10 @@
 static char THIS_FILE[]=__FILE__;
 #define new DEBUG_NEW
 #endif
+
+//////////////////////////////////////////////////////////////////////
+// Construction/Destruction
+//////////////////////////////////////////////////////////////////////
 
 CUIPointInitDlg::CUIPointInitDlg()
 {
@@ -41,14 +49,10 @@ bool CUIPointInitDlg::Load(HANDLE hFile)
 {
 	if(CN3UIBase::Load(hFile)==false) return false;
 
-	m_pBtn_Ok			= (CN3UIButton*)GetChildByID("btn_ok");			
-	__ASSERT(m_pBtn_Ok,	"m_pBtn_Ok NULL UI Component!!");
-	
-	m_pBtn_Cancel		= (CN3UIButton*)GetChildByID("btn_cancel");		
-	__ASSERT(m_pBtn_Cancel, "m_pBtn_Cancel NULL UI Component!!");
+	m_pBtn_Ok			= (CN3UIButton*)GetChildByID("btn_ok");			__ASSERT(m_pBtn_Ok,	"NULL UI Component!!");
+	m_pBtn_Cancel		= (CN3UIButton*)GetChildByID("btn_cancel");		__ASSERT(m_pBtn_Cancel, "NULL UI Component!!");
 
-	m_pText_NeedGold	= (CN3UIString*)GetChildByID("string_gold");	
-	__ASSERT(m_pText_NeedGold,	"m_pText_NeedGold NULL UI Component!!");
+	m_pText_NeedGold	= (CN3UIString*)GetChildByID("string_gold");	__ASSERT(m_pText_NeedGold,	"NULL UI Component!!");
 
 	return true;
 }
@@ -95,6 +99,7 @@ void CUIPointInitDlg::PushOkButton()
 	CGameProcedure::s_pSocket->Send(byBuff, iOffset);
 }
 
+//this_ui_add_start
 bool CUIPointInitDlg::OnKeyPress(int iKey)
 {
 	switch(iKey)
@@ -126,3 +131,5 @@ void CUIPointInitDlg::InitDlg(bool bAllpoint, int iGold)
 		}
 	}
 }
+
+//this_ui_add_end

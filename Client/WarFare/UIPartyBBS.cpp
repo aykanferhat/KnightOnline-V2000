@@ -497,12 +497,12 @@ void CUIPartyBBS::RequestParty()
 			__InfoPartyBBS IPB = (*it);
 
 			if(0 != lstrcmpi(IPB.szID.c_str(), CGameProcedure::s_pPlayer->m_InfoBase.szID.c_str()))
-			{//나 자신에게는 파티 신청을 못하게 한다...
+			{
 				std::string szMsg;
 				if (CGameProcedure::s_pProcMain->MsgSend_PartyOrForceCreate(0, IPB.szID))
-					::_LoadStringFromResource(IDS_PARTY_INVITE, szMsg); // 파티
+					::_LoadStringFromResource(IDS_PARTY_INVITE, szMsg); 
 				else
-					::_LoadStringFromResource(IDS_PARTY_INVITE_FAILED, szMsg); // 파티 초대 실패
+					::_LoadStringFromResource(IDS_PARTY_INVITE_FAILED, szMsg); 
 				CGameProcedure::s_pProcMain->MsgOutput(IPB.szID + szMsg, 0xffffff00);
 				break;
 			}

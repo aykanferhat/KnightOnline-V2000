@@ -19,7 +19,7 @@ void CDungeonManager::InitWorld(int iZoneID, const __Vector3& vPosPlayer)
 		return; 
 	}
 		
-	m_pvsmgr.LoadFromFile(pZone->szTerrainFN);
+	m_pvsmgr.LoadFromFile(pZone->sTerrainFN);
 }
 
 void CDungeonManager::Tick()
@@ -121,3 +121,6 @@ CN3Shape* CDungeonManager::PickWithShape(int iXScreen, int iYScreen, bool bMustH
 {
 	return m_pvsmgr.PickWithShape(iXScreen, iYScreen, bMustHaveEvent, pvPick);
 }
+
+
+

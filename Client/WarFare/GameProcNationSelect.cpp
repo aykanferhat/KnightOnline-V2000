@@ -38,7 +38,7 @@ void CGameProcNationSelect::Init()
 	_TBL_TABLE_UI* pTbl = file_Tbl_UI.Find(NATION_KARUS);
 	if(pTbl)
 	{
-		szTemp = pTbl->Co_nationselect_us;
+		szTemp = pTbl->re_nation_Select;
 	}
 	
 	m_pUINationSelectDlg = new CUINationSelectDlg();

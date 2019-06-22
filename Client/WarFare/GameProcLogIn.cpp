@@ -59,10 +59,10 @@ void CGameProcLogIn::Init()
 	CGameProcedure::Init();
 
 	m_pTexBkg = new CN3Texture();
-	m_pTexBkg->LoadFromFile("Intro\\Moon.dxt");
+	//m_pTexBkg->LoadFromFile("Intro\\Moon.dxt");
 
 	m_pChr = new CN3Chr();
-	m_pChr->LoadFromFile("Intro\\Intro.N3Chr");
+	//m_pChr->LoadFromFile("Intro\\Intro.N3Chr");
 	m_pChr->AniCurSet(0);
 	
 	m_pCamera = new CN3Camera();
@@ -85,7 +85,7 @@ void CGameProcLogIn::Init()
 	
 	_TBL_TABLE_UI* pTbl = file_Tbl_UI.GetIndexedData(0);
 	//TODO(srmeier) : the UIE saves in the old format...
-	if (pTbl) m_pUILogIn->LoadFromFile(pTbl->Co_login_intro_us);
+	if (pTbl) m_pUILogIn->LoadFromFile(pTbl->co_login);
 
 	RECT rc = m_pUILogIn->GetRegion();
 	int iX = (CN3Base::s_CameraData.vp.Width - (rc.right - rc.left))/2;
@@ -136,7 +136,7 @@ void CGameProcLogIn::Init()
 	}
 	else
 	{
-		this->MessageBoxPost("No server list", "LogIn Server fail", MB_OK, BEHAVIOR_EXIT); 
+		MessageBoxPost("No server list", "LogIn Server fail", MB_OK, BEHAVIOR_EXIT); 
 	}
 
 	if(LIC_KNIGHTONLINE != s_eLogInClassification)
@@ -271,7 +271,8 @@ bool CGameProcLogIn::MsgSend_AccountLogIn(e_LogInClassification eLIC)
 		m_pUILogIn->AccountIDGet(s_szAccount); 
 		m_pUILogIn->AccountPWGet(s_szPassWord); 
 	}
-	if(	s_szAccount.empty() || s_szPassWord.empty() || s_szAccount.size() >= 20 || s_szPassWord.size() >= 12) return false;
+	if(	s_szAccount.empty() || s_szPassWord.empty() || s_szAccount.size() >= 20 || s_szPassWord.size() >= 12) 
+		return false;
 
 	m_pUILogIn->SetVisibleLogInUIs(false);
 	m_pUILogIn->SetRequestedLogIn(true);
@@ -281,18 +282,19 @@ bool CGameProcLogIn::MsgSend_AccountLogIn(e_LogInClassification eLIC)
 	int iOffset=0;										
 
 	uint8_t byCmd = N3_ACCOUNT_LOGIN;
-	if(LIC_KNIGHTONLINE == eLIC) byCmd = N3_ACCOUNT_LOGIN;
-	else if(LIC_MGAME == eLIC) byCmd = N3_ACCOUNT_LOGIN_MGAME;
-//	else if(LIC_DAUM == eLIC) byCmd = N3_ACCOUNT_LOGIN_DAUM;
+	if(LIC_KNIGHTONLINE == eLIC) 
+		byCmd = N3_ACCOUNT_LOGIN;
+	else 
+		if(LIC_MGAME == eLIC) 
+			byCmd = N3_ACCOUNT_LOGIN_MGAME;
 
 	CAPISocket::MP_AddByte(byBuff, iOffset, byCmd);				
 	CAPISocket::MP_AddShort(byBuff, iOffset, (int16_t)s_szAccount.size());	
 	CAPISocket::MP_AddString(byBuff, iOffset, s_szAccount);		
 	CAPISocket::MP_AddShort(byBuff, iOffset, (int16_t)s_szPassWord.size());	
 	CAPISocket::MP_AddString(byBuff, iOffset, s_szPassWord);		
-		
-	s_pSocket->Send(byBuff, iOffset);								
 
+	s_pSocket->Send(byBuff, iOffset);								
 	return true;
 }
 
@@ -330,7 +332,7 @@ void CGameProcLogIn::MsgRecv_AccountLogIn(int iCmd, Packet& pkt)
 			::_LoadStringFromResource(IDS_NOACCOUNT_RETRY_MGAMEID, szMsg);
 			::_LoadStringFromResource(IDS_CONNECT_FAIL, szTmp);
 
-			this->MessageBoxPost(szMsg, szTmp, MB_YESNO, BEHAVIOR_MGAME_LOGIN); // MGame ID 
+			MessageBoxPost(szMsg, szTmp, MB_YESNO, BEHAVIOR_MGAME_LOGIN); // MGame ID 
 		}
 		else
 		{
@@ -339,7 +341,7 @@ void CGameProcLogIn::MsgRecv_AccountLogIn(int iCmd, Packet& pkt)
 			::_LoadStringFromResource(IDS_NO_MGAME_ACCOUNT, szMsg);
 			::_LoadStringFromResource(IDS_CONNECT_FAIL, szTmp);
 
-			this->MessageBoxPost(szMsg, szTmp, MB_OK); // MGame ID 
+			MessageBoxPost(szMsg, szTmp, MB_OK); // MGame ID 
 		}
 	}
 	else if(3 == iResult)
@@ -348,7 +350,7 @@ void CGameProcLogIn::MsgRecv_AccountLogIn(int iCmd, Packet& pkt)
 		std::string szTmp;
 		::_LoadStringFromResource(IDS_WRONG_PASSWORD, szMsg);
 		::_LoadStringFromResource(IDS_CONNECT_FAIL, szTmp);
-		this->MessageBoxPost(szMsg, szTmp, MB_OK); 
+		MessageBoxPost(szMsg, szTmp, MB_OK); 
 	}
 	else if(4 == iResult) 
 	{
@@ -356,7 +358,7 @@ void CGameProcLogIn::MsgRecv_AccountLogIn(int iCmd, Packet& pkt)
 		std::string szTmp;
 		::_LoadStringFromResource(IDS_SERVER_CONNECT_FAIL, szMsg);
 		::_LoadStringFromResource(IDS_CONNECT_FAIL, szTmp);
-		this->MessageBoxPost(szMsg, szTmp, MB_OK); 
+		MessageBoxPost(szMsg, szTmp, MB_OK); 
 	}
 	else if(5 == iResult) 
 	{
@@ -386,7 +388,7 @@ void CGameProcLogIn::MsgRecv_AccountLogIn(int iCmd, Packet& pkt)
 			std::string szTmp;
 			::_LoadStringFromResource(IDS_LOGIN_ERR_ALREADY_CONNECTED_ACCOUNT, szMsg);
 			::_LoadStringFromResource(IDS_CONNECT_FAIL, szTmp);
-			this->MessageBoxPost(szMsg, szTmp, MB_OK); 
+			MessageBoxPost(szMsg, szTmp, MB_OK); 
 		}
 	}
 	else
@@ -395,7 +397,7 @@ void CGameProcLogIn::MsgRecv_AccountLogIn(int iCmd, Packet& pkt)
 		std::string szTmp;
 		::_LoadStringFromResource(IDS_CURRENT_SERVER_ERROR, szMsg);
 		::_LoadStringFromResource(IDS_CONNECT_FAIL, szTmp);
-		this->MessageBoxPost(szMsg, szTmp, MB_OK); 
+		MessageBoxPost(szMsg, szTmp, MB_OK); 
 	}
 
 	if(1 != iResult) 

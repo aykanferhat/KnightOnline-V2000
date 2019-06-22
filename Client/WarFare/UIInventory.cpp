@@ -417,7 +417,7 @@ void CUIInventory::InitIconWnd(e_UIWND eWnd)
 
 	m_pUITooltipDlg = new CUIImageTooltipDlg();
 	m_pUITooltipDlg->Init(this);
-	m_pUITooltipDlg->LoadFromFile(pTblUI->Co_ItemInfo_us);
+	m_pUITooltipDlg->LoadFromFile(pTblUI->co_ItemInfo);
 	m_pUITooltipDlg->InitPos();
 	m_pUITooltipDlg->SetVisible(FALSE);	
 

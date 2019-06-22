@@ -53,23 +53,16 @@ bool CUINPCChangeEvent::Load(HANDLE hFile)
 
 	if(CN3UIBase::Load(hFile)==false) return false;
 
-	m_pBtn_Change		= (CN3UIButton*)GetChildByID("Btn_change");		
-	__ASSERT(m_pBtn_Change,	"m_pBtn_Change NULL UI Component!!");
-	
-	m_pBtn_Repoint0		= (CN3UIButton*)GetChildByID("Btn_repoint0");	
-	__ASSERT(m_pBtn_Repoint0, "m_pBtn_Repoint0 NULL UI Component!!");
-	
-	m_pBtn_Repoint1		= (CN3UIButton*)GetChildByID("Btn_repoint1");	
-	__ASSERT(m_pBtn_Repoint1,	"m_pBtn_Repoint1 NULL UI Component!!");
-	
-	m_pBtn_Close		= (CN3UIButton*)GetChildByID("Btn_close");		
-	__ASSERT(m_pBtn_Close,	"m_pBtn_Close NULL UI Component!!");
+	m_pBtn_Change		= (CN3UIButton*)GetChildByID("Btn_change");		__ASSERT(m_pBtn_Change,	"NULL UI Component!!");
+	m_pBtn_Repoint0		= (CN3UIButton*)GetChildByID("Btn_repoint0");	__ASSERT(m_pBtn_Repoint0, "NULL UI Component!!");
+	m_pBtn_Repoint1		= (CN3UIButton*)GetChildByID("Btn_repoint1");	__ASSERT(m_pBtn_Repoint1,	"NULL UI Component!!");
+	m_pBtn_Close		= (CN3UIButton*)GetChildByID("Btn_close");		__ASSERT(m_pBtn_Close,	"NULL UI Component!!");
 
 	e_Nation eNation = CGameProcedure::s_pPlayer->m_InfoBase.eNation; 
 	_TBL_TABLE_UI* pTbl = CGameProcedure::file_Tbl_UI.Find(eNation);
 
 	m_pDlg = new CUIPointInitDlg();
-	m_pDlg->LoadFromFile(pTbl->co_change_bill_us);
+	m_pDlg->LoadFromFile(pTbl->co_change_bill);
 
 	int iXPos, iYPos;
 	iXPos = (iW/2) - (m_pDlg->GetRegion().right - m_pDlg->GetRegion().left)/2;
@@ -171,6 +164,7 @@ void CUINPCChangeEvent::ReceivePriceFromServer(int iGold)
 	}
 }
 
+//this_ui_add_start
 void CUINPCChangeEvent::SetVisible(bool bVisible)
 {
 	CN3UIBase::SetVisible(bVisible);
@@ -191,4 +185,5 @@ bool CUINPCChangeEvent::OnKeyPress(int iKey)
 
 	return CN3UIBase::OnKeyPress(iKey);
 }
+//this_ui_add_end
 

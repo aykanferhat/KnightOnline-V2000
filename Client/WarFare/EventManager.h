@@ -1,9 +1,13 @@
+// EventManager.h: interface for the CEventManager class.
+//
+//////////////////////////////////////////////////////////////////////
+
 #if !defined(AFX_EVENTMANAGER_H__7FB7F7FD_67B8_4F22_AE3E_C41581C16561__INCLUDED_)
 #define AFX_EVENTMANAGER_H__7FB7F7FD_67B8_4F22_AE3E_C41581C16561__INCLUDED_
 
 #if _MSC_VER > 1000
 #pragma once
-#endif
+#endif // _MSC_VER > 1000
 
 #include "N3Base.h"
 
@@ -40,4 +44,4 @@ public:
 
 };
 
-#endif
+#endif // !defined(AFX_EVENTMANAGER_H__7FB7F7FD_67B8_4F22_AE3E_C41581C16561__INCLUDED_)

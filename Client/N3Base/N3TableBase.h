@@ -3,12 +3,12 @@
 
 #if _MSC_VER > 1000
 #pragma once
-#endif // _MSC_VER > 1000
+#endif 
 
 #include <vector>
 #include <map>
 
-#include "My_3DStruct.h" // _ASSERT
+#include "My_3DStruct.h" 
 
 template <typename Type> class CN3TableBase
 {

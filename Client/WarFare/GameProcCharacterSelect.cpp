@@ -113,7 +113,7 @@ void CGameProcCharacterSelect::Init()
 
 	m_pUICharacterSelect = new CUICharacterSelect();
 	m_pUICharacterSelect->Init(s_pUIMgr);
-	if(pTbl) m_pUICharacterSelect->LoadFromFile(pTbl->Co_CharacterSelect_us);
+	if(pTbl) m_pUICharacterSelect->LoadFromFile(pTbl->ka_CharacterSelect);
 	m_pUICharacterSelect->SetPos(0,0);
 	s_pUIMgr->SetFocusedUI((CN3UIBase*)m_pUICharacterSelect);
 

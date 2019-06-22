@@ -1,9 +1,13 @@
+// UIMessageBox.h: interface for the CUIMessageBox class.
+//
+//////////////////////////////////////////////////////////////////////
+
 #if !defined(AFX_UIMESSAGEBOX_H__943941D4_06D0_40A0_BEF2_DA3A27406EDC__INCLUDED_)
 #define AFX_UIMESSAGEBOX_H__943941D4_06D0_40A0_BEF2_DA3A27406EDC__INCLUDED_
 
 #if _MSC_VER > 1000
 #pragma once
-#endif 
+#endif // _MSC_VER > 1000
 
 #include "N3UIBase.h"
 #include "GameDef.h"
@@ -39,4 +43,4 @@ public:
 
 };
 
-#endif
+#endif // !defined(AFX_UIMESSAGEBOX_H__943941D4_06D0_40A0_BEF2_DA3A27406EDC__INCLUDED_)

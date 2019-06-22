@@ -491,7 +491,6 @@ bool CN3FXPartBase::Save(HANDLE hFile)
 	//*/
 
 	// m_iBaseVersion >= 2 
-	//
 	WriteFile(hFile, &m_dwSrcBlend, sizeof(uint32_t), &dwRWC, NULL);
 	WriteFile(hFile, &m_dwDestBlend, sizeof(uint32_t), &dwRWC, NULL);
 
@@ -499,11 +498,21 @@ bool CN3FXPartBase::Save(HANDLE hFile)
 	WriteFile(hFile, &m_fFadeIn, sizeof(float), &dwRWC, NULL);
 	
 	m_dwRenderFlag = RF_ALPHABLENDING | RF_NOTUSEFOG | RF_DIFFUSEALPHA | RF_NOTUSELIGHT | RF_DOUBLESIDED | RF_NOTZWRITE | RF_NOTZBUFFER; 
-	if(m_dwZEnable == D3DZB_TRUE) m_dwRenderFlag ^= RF_NOTZBUFFER;
-	if(m_dwZWrite == TRUE) m_dwRenderFlag ^= RF_NOTZWRITE;
-	if(m_dwDoubleSide != D3DCULL_NONE) m_dwRenderFlag ^= RF_DOUBLESIDED;
-	if(m_dwLight == TRUE) m_dwRenderFlag ^= RF_NOTUSELIGHT;
-	if(m_bAlpha != TRUE) m_dwRenderFlag ^= RF_ALPHABLENDING;
+
+	if(m_dwZEnable == D3DZB_TRUE)
+		m_dwRenderFlag ^= RF_NOTZBUFFER;
+
+	if(m_dwZWrite == TRUE) 
+		m_dwRenderFlag ^= RF_NOTZWRITE;
+
+	if(m_dwDoubleSide != D3DCULL_NONE) 
+		m_dwRenderFlag ^= RF_DOUBLESIDED;
+
+	if(m_dwLight == TRUE) 
+		m_dwRenderFlag ^= RF_NOTUSELIGHT;
+
+	if(m_bAlpha != TRUE)
+		m_dwRenderFlag ^= RF_ALPHABLENDING;
 	
 	WriteFile(hFile, &m_dwRenderFlag, sizeof(uint32_t), &dwRWC, NULL);
 

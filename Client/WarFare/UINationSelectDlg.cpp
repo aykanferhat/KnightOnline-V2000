@@ -58,3 +58,4 @@ bool CUINationSelectDlg::ReceiveMessage(CN3UIBase* pSender, uint32_t dwMsg)
 	}
 	return true;
 }
+

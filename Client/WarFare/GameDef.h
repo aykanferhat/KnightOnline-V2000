@@ -3,8 +3,8 @@
 
 #include <string>
 
-#include "shared/types.h"
-#include "shared/version.h"
+#include "../shared/types.h"
+#include "../shared/version.h"
 
 #include "SDL2/SDL.h"
 
@@ -17,9 +17,9 @@
 #define ASSERT
 #endif
 #endif
-#include "shared/Packet.h"
+#include "../shared/Packet.h"
 
-const int CURRENT_VERSION = 2100;
+const int CURRENT_VERSION = 2233;
 
 const float PACKET_INTERVAL_MOVE = 1.5f;				
 const float PACKET_INTERVAL_ROTATE = 4.0f;
@@ -565,12 +565,12 @@ struct __InfoPartyOrForce
 
 enum e_PartyStatus { PARTY_STATUS_DOWN_HP = 1, PARTY_STATUS_DOWN_ETC = 2 };
 
-struct __InfoPartyBBS 
+struct __InfoPartyBBS // 파티 지원 게시판 구조체..
 {
-	std::string szID;			
-	int			iID;			
+	std::string szID;			// 파티 이름 문자열
+	int			iID;			// 파티원 ID
 	int			iLevel;			// Level
-	e_Class		eClass;			
+	e_Class		eClass;			// 직업
 	int			iMemberCount;
 
 	void Init()
@@ -588,8 +588,18 @@ struct __InfoPartyBBS
 	}
 };
 
-enum {	RESRC_UI_LOGIN = 0, RESRC_UI_CHARACTERSELECT, RESRC_UI_CHARACTERCREATE, RESRC_UI_INVENTORY, RESRC_UI_CHAT,
-		RESRC_UI_MYINFORMATION, RESRC_UI_TARGET, RESRC_UI_HOTKEY, RESRC_UI_FUNCTION };
+enum 
+{	
+	RESRC_UI_LOGIN = 0, 
+	RESRC_UI_CHARACTERSELECT,
+	RESRC_UI_CHARACTERCREATE,
+	RESRC_UI_INVENTORY, 
+	RESRC_UI_CHAT,
+	RESRC_UI_MYINFORMATION,
+	RESRC_UI_TARGET,
+	RESRC_UI_HOTKEY,
+	RESRC_UI_FUNCTION
+};
 
 typedef struct _TBL_TABLE_TEXTS
 {
@@ -600,23 +610,22 @@ typedef struct _TBL_TABLE_TEXTS
 
 typedef struct _TBL_TABLE_ZONE
 {
-	uint32_t        dwID;				  // zone ID
-	std::string		szTerrainFN;          // GTD
-
-	std::string		szName;
-	std::string		szColorMapFN;         // TCT
-	std::string		szLightMapFN;         // TLT
-	std::string		szObjectPostDataFN;   // OPD
+	uint32_t        sZoneID;			  // Zone ID
+	std::string		sTerrainFN;			  // File.gtd
+	std::string		szName;				  // File.MapName
+	std::string		szColorMapFN;         // File.tct
+	std::string		szLightMapFN;         // File.tlt
+	std::string		szObjectPostDataFN;   // File.opd
 
 #if __VERSION > 1264
 	std::string		szReserved;
 #endif
 
-	std::string		szMiniMapFN;          // DXT
-	std::string		szSkySetting;         // N3Sky
+	std::string		szMiniMapFN;          // File.dxt
+	std::string		szSkySetting;         // File.n3sky
 	int				bIndicateEnemyPlayer; // SByte (now Int32)
 	int				iFixedSundDirection;  // Int32
-	std::string		szLightObjFN;         // GLO
+	std::string		szLightObjFN;         // File.glo
 
 	std::string		szGEVFN;              // GEV
 	int				iIdk0;                // idk
@@ -630,238 +639,343 @@ typedef struct _TBL_TABLE_ZONE
 	std::string		szOPDSUBFN;           // OPDSUB
 	int				iIdk6;
 	std::string		szEVTSUB;             // EVTSUB
-	std::string		sMob;
 } 
 TABLE_ZONE;
 
 typedef struct _TBL_TABLE_UI
 {
 	uint32_t	UIndex;							// 0 (Karus/Human)
-	std::string login_intro_us;					// 1 
-	std::string Co_Cmd_us;						// 2 
-	std::string co_chatting_box_us;				// 3 
-	std::string co_information_box_us;			// 4 
-	std::string Co_StateBar_us;					// 5 
-	std::string Co_Various_frame_us;			// 6 
-	std::string Co_Page_State_us;				// 7 
-	std::string Co_Page_clan_us;				// 8 
-	std::string Co_Page_Quest_us;				// 9 
-	std::string Co_Page_Friends_us;				// 10 
-	std::string Co_Inventory_us;				// 11
-	std::string Co_Transaction_us;				// 12
-	std::string co_DroppedItem_us;				// 13
-	std::string co_TargetBar_us;				// 14
-	std::string Co_TargetSymbol;				// 15
-	std::string Co_SkillTree_us;				// 16
-	std::string co_HotKey_us;					// 17
-	std::string Ka_MiniMap_us;					// 18
-	std::string Co_Party_us;					// 19
-	std::string Co_PartyBoard_us;				// 20
-	std::string Co_Help_us;						// 21
-	std::string Co_Notice_us;					// 22
-	std::string Co_CharacterCreate_us;			// 23
-	std::string Co_CharacterSelect_us;			// 24
-	std::string Co_ToolTip_us;					// 25
-	std::string Co_MessageBox_us;				// 26
-	std::string Co_Loading_us;					// 27
-	std::string Co_ItemInfo_us;					// 28
-	std::string Co_PersonalTrade_us;			// 29
-	std::string Co_PersonalTradeEdit_us;		// 30
-	std::string co_smith_us;					// 31
-	std::string Co_Warp_us;						// 32
-	std::string Co_change_us;					// 33
-	std::string Co_tooltop_repair_us;			// 34
-	std::string co_talk_us;						// 35
-	std::string co_list2_us;					// 36
-	std::string co_KnightsOperation_us;			// 37
-	std::string co_changeclass_us;				// 38
-	std::string Co_EndMessage_us;				// 39
-	std::string Co_WareHouse_us;				// 40
-	std::string co_change_us;					// 41
-	std::string co_change_bill_us;				// 42
-	std::string co_inn_us;						// 43
-	std::string co_creat_clan_us;				// 44
-	std::string Co_saleboard_us;				// 45
-	std::string co_saleboardselection_us;		// 46
-	std::string co_saleboardmemo_us;			// 47
-	std::string co_saleboardmemolist_us;		// 48
-	std::string co_QuestMenu_us;				// 49
-	std::string co_QuestTalk_us;				// 50
-	std::string co_Quest_Edit_us;				// 51
-	std::string co_Dead_us;						// 52
-	std::string Co_Elmorad_loading_us;			// 53
-	std::string Co_Karus_loading_us;			// 54
-	std::string Co_nationselect_us;				// 55
-	std::string Co_chat_small_us;				// 56
-	std::string Co_msgoutput_small_us;			// 57
-	std::string co_ItemUpgrade_us;				// 58
-	std::string co_DuelCreate_us;				// 59
-	std::string co_DuelList_us;					// 60
-	std::string co_DuelMessageBox_us;			// 61
-	std::string co_DuelEditMsg_us;				// 62
-	std::string co_DuelLobby_us;				// 63
-	std::string co_QuestContent_us;				// 64
-	std::string co_DuelItemCount_us;			// 65
-	std::string co_TradeInventory_us;			// 66
-	std::string co_TradeBuyInventory_us;		// 67
-	std::string co_TradeItemDisplay_us;			// 68
-	std::string co_TradePrice_us;				// 69
-	std::string co_TradeCount_us;				// 70
-	std::string co_TradeMessageBox_us;			// 71
-	std::string Co_page_knights_us;				// 72
-	std::string Co_page_knights_Union_main_us;	// 73
-	std::string Co_page_knights_Union_sub_us;	// 74
-	std::string Co_CmdList_us;					// 75
-	std::string co_CmdEdit_us;					// 76
-	std::string co_knights_crest_us;			// 77
-	std::string co_ShoppingMall_us;				// 78
-	std::string Co_levelguide_us;				// 79
-	std::string co_WarfareNpc_us;				// 80
-	std::string co_WarfarePetition_us;			// 81
-	std::string co_CastleUnion_us;				// 82
-	std::string co_WarfareSchedule_us;			// 83
-	std::string co_ExitMenu_us;					// 84
-	std::string co_resurrection_us;				// 85
-	std::string co_idchange_us;					// 86
-	std::string co_id_us;						// 87
-	std::string co_id_check_us;					// 88
-	std::string co_WarfareAdministrationNpc_us;	// 89
-	std::string co_WarfareTaxTariff_us;			// 90
-	std::string Co_WarfareMantleList_us;		// 91
-	std::string co_KnightsMantleShop_us;		// 92
-	std::string co_WarfareTaxCollection_us;		// 93
-	std::string co_WarfareTaxRate_us;			// 94
-	std::string co_WarfareTaxMsg_us;			// 95
-	std::string Co_catapult_us;					// 96
-	std::string co_disguiseRing_us;				// 97
-	std::string co_MsgBoxOk_us;					// 98
-	std::string co_MsgBoxOkCancel_us;			// 99
-	std::string co_whisper_open_us;				// 100
-	std::string co_whisper_close_us;			// 101
-	std::string co_knights_crest_chr_us;		// 102
-	std::string co_warning_us;					// 103
-	std::string co_conversation_us;				// 104
-	std::string co_blog_us;						// 105
-	std::string co_inn_password_us;				// 106
-	std::string co_rookietip_us;				// 107
-	std::string co_WebPage_us;					// 108
-	std::string co_partyboard_message_us;		// 109
-	std::string co_symbol_us;					// 110
-	std::string co_rental_npc_us;				// 111
-	std::string co_rental_Transaction_us;		// 112
-	std::string co_rental_entry_us;				// 113
-	std::string co_rental_item_us;				// 114
-	std::string co_rental_message_us;			// 115
-	std::string co_rental_Count_us;				// 116
-	std::string co_netdio_us;					// 117
-	std::string Co_login_intro_us;				// 118
-	std::string co_login_intro_sub_us;			// 119
-	std::string co_CharacterSelect_us;			// 120
-	std::string co_characterCreate_us;			// 121
-	std::string co_other_state_us;				// 122
-	std::string co_ppcard_begin_us;				// 123
-	std::string co_ppcard_list_us;				// 125
-	std::string co_ppcard_regist_us;			// 126
-	std::string co_ppcard_message_us;			// 127
-	std::string co_ppcard_buylist_us;			// 128
-	std::string co_ppcard_myinfo_us;			// 129
-	std::string co_nation_Select_us;			// 130
-	std::string co_usa_logo_us;					// 131
-	std::string co_monster_us;					// 132
-	std::string co_NationTaxNpc_us;				// 133
-	std::string co_NationTaxRate_us;			// 134
-	std::string co_MsgBoxOk_King_us;			// 135
-	std::string co_MsgBoxOkCancel_King_us;		// 136
-	std::string co_King_ElectionBoard_us;		// 137
-	std::string co_King_ElectionList_us;		// 138
-	std::string co_King_ElectionMain_us;		// 139
-	std::string co_King_MemberRecommend_us;		// 140
-	std::string co_King_ElectionRegist_us;		// 141
-	std::string co_ringUpgrade_us;				// 142
-	std::string co_upgradeselect_us;			// 143
-	std::string co_tradeMessage_us;				// 144
-	std::string co_piecechange_us;				// 145
-	std::string co_time_us;						// 146
-	std::string co_map1024_us;					// 147
-	std::string co_map1280_us;					// 148
-	std::string co_map1600_us;					// 149
-	std::string co_mailsystem_alarm_us;			// 150
-	std::string co_mailsystem_us;				// 151
-	std::string co_mailsystem_read_us;			// 152
-	std::string co_mailsystem_list_us;			// 153
-	std::string co_show_icon_us;				// 154
-	std::string co_changename_us;				// 155
-	std::string co_buffer_us;					// 156
-	std::string co_taskbar_main_us;				// 157
-	std::string co_taskbar_sub_us;				// 158
-	std::string co_hpbar_us;					// 159
-	std::string co_minimap_us;					// 160
-	std::string co_Seed_Helper_us;				// 161
-	std::string co_Quest_Seed_us;				// 162
-	std::string co_Quest_Npc_Talk_us;			// 163
-	std::string co_Quest_Npc_Menu_us;			// 164
-	std::string co_Quest_Viewer_us;				// 165
-	std::string co_Quest_Map_us;				// 166
-	std::string co_Quest_Requital_us;			// 167
-	std::string co_Quest_Completed_us;			// 168
-	std::string co_Quest_MainStory_1_us;		// 169
-	std::string co_Quest_MainStory_2_us;		// 170
-	std::string co_Quest_MainStory_3_us;		// 171
-	std::string Agreement_tw_us;				// 172
-	std::string co_EventPremium_us;				// 173
-	std::string co_EventNotice_us;				// 174
-	std::string co_EventQuest_us;				// 175
-	std::string co_EventContent_us;				// 176
-	std::string co_MainTopNotice_us;			// 177
-	std::string co_minimenu_us;					// 178
-	std::string co_loading_event_us;			// 179
-	std::string co_durability_us;				// 180
-	std::string co_TradeItemDisplaySpecial_us;	// 181
-	std::string co_check;						// 182
-	std::string co_item_Seal_us;				// 183
-	std::string co_pet_various_frame_us;		// 184
-	std::string co_pet_page_state_us;			// 185
-	std::string co_pet_page_inventory_us;		// 186
-	std::string co_pet_page_skil_us;			// 187
-	std::string co_pet_hotkey_us;				// 189
-	std::string co_pet_quest_us;				// 190
-	std::string co_pet_hpbar_us;				// 191
-	std::string co_cos_2_us;					// 192
-	std::string co_partyboard_message_2_us;		// 193
-	std::string co_party_access_close_us;		// 194
-	std::string co_party_access_open_us;		// 195
-	std::string co_character_seal_us;			// 196
-	std::string co_character_seal_trans_us;		// 197
-	std::string co_character_seal_tooltip_us;	// 198
-	std::string co_introduction_us;				// 199
-	std::string co_InsertID_us;					// 200
-	std::string co_page_force_king_us;			// 201
-	std::string co_page_force_officer_us;		// 202
-	std::string co_page_force_member_us;		// 203
-	std::string co_force_join_us;				// 204
-	std::string co_palette_us;					// 205
-	std::string co_clan_ClanPoint_us;			// 206
-	std::string co_clan_RealmPointSave_us;		// 204
-	std::string co_clan_LeaderTransfer_us;		// 208
-	std::string co_pet_balloon_us;				// 209
-	std::string co_pointList_us;				// 210
-	std::string co_pointShow_us;				// 211
-	std::string co_Radder_us;					// 212
-	std::string co_quest_mini_tip_us;			// 213
-	std::string co_check_button_us;				// 214
-	std::string co_voteboard_us;				// 215
-	std::string co_King_LunaMap_us;				// 216
-	std::string co_loading_luna_us;				// 217
-	std::string co_chat_creat_us;				// 218
-	std::string co_caht_main_us;				// 219
-	std::string co_chat_into_us;				// 220
-	std::string co_chat_name_us;				// 221
-	std::string co_fortune_us;					// 222
-	std::string co_chat_minimenu_us;			// 223
-	std::string Co_Movie_Save_us;				// 224
-	std::string Co_Movie_Resolution_us;			// 225
-	std::string Co_Movie_Result_us;				// 226
-	std::string co_file_select_us;				// 227
+	std::string ka_Cmd;							// 1
+	std::string co_login;						// 2	
+	std::string re_chatting_box;				// 3
+	std::string re_information_box;				// 4
+	std::string co_soccer_state;				// 5 
+	std::string re_Various_frame;				// 6
+	std::string re_Page_State;					// 7 
+	std::string co_Page_clan;					// 8
+	std::string ka_Page_Quest;					// 9
+	std::string re_Page_Friends;				// 10 
+	std::string re_Inventory;					// 11
+	std::string re_Transaction;					// 12 
+	std::string re_DroppedItem;					// 13
+	std::string co_TargetBar;					// 14
+	std::string Co_TargetSymbol;				// 0 				
+	std::string ka_SkillTree;					// 0 
+	std::string re_HotKey;						// 0 
+	std::string ka_MiniMap;						// 0 
+	std::string re_Party;						// 0 
+	std::string re_PartyBoard;					// 0 
+	std::string co_Help;						// 0 
+	std::string re_notice;						// 0 
+	std::string re_CharacterCreate;				// 0  
+	std::string ka_CharacterSelect;				// 0 
+	std::string co_ToolTip;						// 0 
+	std::string re_MessageBox;					// 0 
+	std::string co_Loading;						// 0 
+	std::string co_ItemInfo;					// 0 
+	std::string ka_PersonalTrade;				// 0 
+	std::string ka_PersonalTradeEdit;			// 0 
+	std::string co_smith;						// 0 
+	std::string re_warp;						// 0 
+	std::string ka_change;						// 0 
+	std::string co_tooltop_repair;				// 0 
+	std::string co_talk;						// 0 
+	std::string co_list2;						// 0 
+	std::string co_KnightsOperation;			// 0 
+	std::string co_changeclass;					// 0 
+	std::string co_EndMessage;					// 0 
+	std::string re_WareHouse;					// 0 
+	std::string co_change;						// 0 
+	std::string co_change_bill;					// 0 
+	std::string co_inn;							// 0 
+	std::string co_creat_clan;					// 0 
+	std::string ka_saleboard;					// 0 
+	std::string co_saleboardselection;			// 0  
+	std::string co_saleboardmemo;				// 0 
+	std::string co_saleboardmemolist;			// 0 
+	std::string co_QuestMenu;					// 0 
+	std::string co_QuestTalk;					// 0 
+	std::string co_Quest_Edit;					// 0 
+	std::string co_Dead;						// 0 
+	std::string Elmorad_loading;				// 0 
+	std::string Karus_loading;					// 0  
+	std::string re_rebuy;						// 0 
+	std::string ka_chat_small;					// 0 
+	std::string ka_msgoutput_small;				// 0 
+	std::string re_ItemUpgrade;					// 0 
+	std::string co_DuelCreate;					// 0 
+	std::string co_DuelList;					// 0 
+	std::string co_DuelMessageBox;				// 0 
+	std::string co_DuelEditMsg;					// 0 
+	std::string co_DuelLobby;					// 0 
+	std::string co_QuestContent;				// 0 
+	std::string co_DuelItemCount;				// 0 
+	std::string re_TradeInventory;				// 0 
+	std::string co_TradeBuyInventory;			// 0 
+	std::string re_TradeItemDisplay;			// 0 
+	std::string re_TradePrice;					// 0 
+	std::string re_TradeCount;					// 0 
+	std::string re_TradeMessageBox;				// 0 
+	std::string co_page_knights;				// 0 
+	std::string co_page_knights_Union_main;		// 0 
+	std::string co_page_knights_Union_sub;		// 0 
+	std::string re_CmdList;						// 0 
+	std::string co_CmdEdit;						// 0 
+	std::string co_knights_crest;				// 0 
+	std::string co_ShoppingMall;				// 0 
+	std::string re_change_chr_idx;				// 0 
+	std::string co_WarfareNpc;					// 0 
+	std::string co_WarfarePetition;				// 0 
+	std::string co_CastleUnion;					// 0 
+	std::string co_WarfareSchedule;				// 0 
+	std::string re_ExitMenu;					// 0 
+	std::string re_resurrection;				// 0 
+	std::string co_idchange;					// 0 
+	std::string co_id;							// 0 
+	std::string co_id_check;					// 0 
+	std::string co_WarfareAdministrationNpc;	// 0 
+	std::string co_WarfareTaxTariff;			// 0 
+	std::string ka_WarfareMantleList;			// 0 
+	std::string re_KnightsMantleShop;			// 0 
+	std::string co_WarfareTaxCollection;		// 0 
+	std::string co_WarfareTaxRate;				// 0 
+	std::string co_WarfareTaxMsg;				// 0 
+	std::string ka_catapult;					// 0 
+	std::string co_disguiseRing;				// 0 
+	std::string co_MsgBoxOk;					// 0 
+	std::string co_MsgBoxOkCancel;				// 0 
+	std::string re_whisper_open;				// 0 
+	std::string re_whisper_close;				// 0 
+	std::string co_knights_crest_chr;			// 0 
+	std::string co_warning;						// 0 
+	std::string co_conversation;				// 0 
+	std::string co_blog;						// 0 
+	std::string co_inn_password;				// 0 
+	std::string co_rookietip;					// 0 
+	std::string co_WebPage;						// 0 
+	std::string re_partyboard_message;			// 0 
+	std::string re_ppcardinput;					// 0 
+	std::string co_rental_npc;					// 0 
+	std::string re_rental_Transaction;			// 0 
+	std::string re_rental_entry;				// 0 
+	std::string re_rental_item;					// 0 
+	std::string re_rental_message;				// 0 
+	std::string re_rental_Count;				// 0 
+	std::string co_netdio;						// 0 
+	std::string re_login_intro;					// 0 
+	std::string co_login_intro_sub;				// 0 
+	std::string re_characterselect;				// 0 
+	std::string re_charactercreate;				// 0 
+	std::string co_other_state;					// 0 
+	std::string co_ppcard_begin;				// 0 
+	std::string co_ppcard_list;					// 0 
+	std::string co_ppcard_regist;				// 0 
+	std::string co_ppcard_message;				// 0 
+	std::string co_ppcard_buylist;				// 0 
+	std::string co_ppcard_myinfo;				// 0 
+	std::string re_nation_Select;				// 0 
+	std::string co_usa_logo;					// 0 
+	std::string co_monster;						// 0 
+	std::string co_NationTaxNpc;				// 0 
+	std::string co_NationTaxRate;				// 0 
+	std::string co_MsgBoxOk_King;				// 0 
+	std::string co_MsgBoxOkCancel_King;			// 0 
+	std::string co_King_ElectionBoard;			// 0 
+	std::string co_King_ElectionList;			// 0 
+	std::string co_King_ElectionMain;			// 0 
+	std::string co_King_MemberRecommend;		// 0 
+	std::string co_King_ElectionRegist;			// 0 
+	std::string re_ringUpgrade;					// 0 
+	std::string co_upgradeselect;				// 0 
+	std::string re_tradeMessage;				// 0 
+	std::string re_piecechange;					// 0 
+	std::string co_time;						// 0 
+	std::string re_map1024;						// 0 
+	std::string co_map1280;						// 0 
+	std::string co_map1600;						// 0 
+	std::string re_mailsystem_alarm;			// 0 
+	std::string re_mailsystem;					// 0 
+	std::string re_mailsystem_read;				// 0 
+	std::string re_mailsystem_list;				// 0 
+	std::string co_show_icon;					// 0 
+	std::string co_changename;					// 0 
+	std::string co_buffer;						// 0  
+	std::string re_taskbar_main;				// 0 
+	std::string re_taskbar_sub;					// 0 
+	std::string re_hpbar;						// 0 
+	std::string re_minimap;						// 0 
+	std::string re_Seed_Helper;					// 0 
+	std::string re_Quest_Seed;					// 0 
+	std::string co_Quest_Npc_Talk;				// 0 
+	std::string re_Quest_Npc_Menu;				// 0 
+	std::string re_Quest_Viewer;				// 0 
+	std::string re_Quest_Map;					// 0 
+	std::string re_Quest_Requital;				// 0 
+	std::string re_Quest_Completed;				// 0 
+	std::string co_Quest_MainStory_1;			// 0 
+	std::string co_Quest_MainStory_2;			// 0 
+	std::string co_Quest_MainStory_3;			// 0 
+	std::string Agreement_tw;					// 0 
+	std::string re_EventPremium;				// 0 
+	std::string re_EventNotice;					// 0 
+	std::string re_EventQuest;					// 0 
+	std::string co_EventContent;				// 0 
+	std::string re_MainTopNotice;				// 0 
+	std::string re_minimenu;					// 0 
+	std::string co_loading_event;				// 0 
+	std::string co_durability;					// 0 
+	std::string re_TradeItemDisplaySpecial;		// 0 
+	std::string co_check;						// 0 
+	std::string co_item_Seal;					// 0 
+	std::string co_pet_various_frame;			// 0 
+	std::string co_pet_page_state;				// 0 
+	std::string co_pet_page_inventory;			// 0 
+	std::string co_pet_page_skil;				// 0 
+	std::string co_pet_hotkey;					// 0 
+	std::string co_pet_quest;					// 0 
+	std::string co_pet_hpbar;					// 0 
+	std::string co_cos_2;						// 0 
+	std::string re_partyboard_message_2;		// 0  
+	std::string co_party_access_close;			// 0 
+	std::string re_party_access_open;			// 0 
+	std::string co_character_seal;				// 0 
+	std::string co_character_seal_trans;		// 0 
+	std::string re_character_seal_tooltip;		// 0 
+	std::string co_introduction;				// 0 
+	std::string co_InsertID;					// 0 
+	std::string co_page_force_king;				// 0 
+	std::string co_page_force_officer;			// 0 
+	std::string co_page_force_member;			// 0 
+	std::string co_force_join;					// 0 
+	std::string co_palette;						// 0 
+	std::string co_clan_ClanPoint;				// 0 
+	std::string co_clan_RealmPointSave;			// 0  
+	std::string co_clan_LeaderTransfer;			// 0 
+	std::string co_pet_balloon;					// 0 
+	std::string co_pointList;					// 0 
+	std::string co_pointShow;					// 0 
+	std::string co_Radder;						// 0 
+	std::string re_quest_mini_tip;				// 0 
+	std::string co_check_button;				// 0 
+	std::string re_voteboard;					// 0 
+	std::string co_King_LunaMap;				// 0 
+	std::string co_loading_luna;				// 0 
+	std::string re_chat_creat;					// 0 
+	std::string re_caht_main;					// 0 
+	std::string re_chat_into;					// 0 
+	std::string re_chat_name;					// 0 
+	std::string co_fortune;						// 0 
+	std::string re_chat_minimenu;				// 0 
+	std::string co_Movie_Save;					// 0 
+	std::string co_Movie_Resolution;			// 0 
+	std::string co_Movie_Result;				// 0 
+	std::string co_file_select;					// 0 
+	std::string re_Quest_Npc_Talk_2;			// 0 
+	std::string re_Quest_Npc_Menu_2;			// 0 
+	std::string re_combinateitem;				// 0 
+	std::string co_CombinationMethod;			// 0 
+	std::string co_reportboard;					// 0  
+	std::string co_macro;						// 0 
+	std::string co_macro_setup;					// 0 
+	std::string co_monstersp;					// 0 
+	std::string re_nestindun;					// 0 
+	std::string re_requesthelp;					// 0 
+	std::string re_requesthelpbutton;			// 0 
+	std::string co_clan_advertisement;			// 0 
+	std::string co_clan_joinlist;				// 0 
+	std::string co_clan_msg;					// 0 
+	std::string re_buystorefind;				// 0 
+	std::string co_buystoreinven;				// 0 
+	std::string re_buystoreindex;				// 0 
+	std::string re_store_select;				// 0 
+	std::string co_msgboxok00;					// 0 
+	std::string re_move_chr_select;				// 0 
+	std::string co_groundeffect;				// 0 
+	std::string co_drop_off;					// 0 
+	std::string co_warstate;					// 0 
+	std::string co_capture;						// 0 
+	std::string co_battle_score;				// 0 
+	std::string co_indun_start;					// 0 
+	std::string co_radder02;					// 0 
+	std::string co_eventweb;					// 0 
+	std::string co_keyb;						// 0 
+	std::string co_scheduler;					// 0 
+	std::string re_schedulerbutton;				// 0 
+	std::string co_anger;						// 0 
+	std::string co_war_enterdeco;				// 0 
+	std::string re_war_borderdefence_enter;		// 0 
+	std::string re_war_chaos_enter;				// 0 
+	std::string re_ladder_chaos;				// 0 
+	std::string co_itemhermeticseal;			// 0 
+	std::string re_ChaosSkillTree;				// 0 
+	std::string chaos_pop;						// 0 
+	std::string co_hair;						// 0 
+	std::string re_skill;						// 0 
+	std::string re_npcmenu;						// 0 
+	std::string co_king_election_vote;			// 0 
+	std::string co_king_election_okbox;			// 0 
+	std::string co_king_election_yesnomsgbox;	// 0 
+	std::string co_siegewarfare;				// 0 
+	std::string re_clan_window;					// 0 
+	std::string re_union_window;				// 0 
+	std::string co_chat_block;					// 0 
+	std::string co_siegewarfare_situation_open;	// 0 
+	std::string co_report_questionnaire;		// 0 
+	std::string co_supermaket_main;				// 0 
+	std::string co_supermaket_sub;				// 0 
+	std::string co_divide;						// 0 
+	std::string co_cash_warehouse;				// 0 
+	std::string co_secret_number;				// 0 
+	std::string re_target_framebar;				// 0  
+	std::string re_channel_list;				// 0 
+	std::string re_war_icon;					// 0 
+	std::string re_powerup_store;				// 0 
+	std::string re_CashCharge;					// 0 
+	std::string re_clan_break;					// 0 
+	std::string re_chatroom_channellist;		// 0 
+	std::string re_chatroom_creat;				// 0 
+	std::string re_chatroom_password;			// 0 
+	std::string re_chatroom_search;				// 0 
+	std::string re_chatroom_room;				// 0 
+	std::string re_training;					// 0 
+	std::string re_genie;						// 0 
+	std::string re_genie_sub;					// 0 
+	std::string re_score;						// 0 
+	std::string re_minimenu_userlist;			// 0 
+	std::string re_map_info;					// 0 
+	std::string re_revival;						// 0 
+	std::string re_seal_exp;					// 0 
+	std::string co_otp_messagebox;				// 0 
+	std::string co_wait_messagebox;				// 0 
+	std::string re_achieve;						// 0 
+	std::string re_achievemenu;					// 0 
+	std::string re_achieve_title;				// 0 
+	std::string re_title_window;				// 0 
+	std::string re_uisubhpbar;					// 0 
+	std::string re_BorderDFF;					// 0 
+	std::string re_change_race;					// 0  
+	std::string co_terms_conditions;			// 0  
+	std::string co_languageselect;				// 0 
+	std::string re_eventtax;					// 0 
+	std::string re_draky_rank;					// 0 
+	std::string re_draky_chapter;				// 0 
+	std::string ui_drakyfloor;					// 0 
+	std::string re_commander_hotkey;			// 0 
+	std::string re_commander_center_skill;		// 0 
+	std::string re_siege_warfare_challenge_list;// 0 
+	std::string re_siege_warfare_challenge;		// 0 
+	std::string re_Achieve_mini;				// 0 
+	std::string re_bountyList;					// 0 
+	std::string re_bountyList_mini;				// 0 
+	std::string re_bountyVanguard;				// 0 
+	std::string re_bountyVanguard_mini;			// 0 
+	std::string re_spinwheel;					// 0 
+	std::string re_fullmoon_popup;				// 0 
+	std::string re_battleroyal_score;			// 0 
+	std::string re_Pathos_JoinBoard;			// 0 
+	std::string re_ugo3d_mini;					// 0 
+	std::string re_ugo3d_shop;					// 0 
+
 }
 _TBL_TABLE_UI;
 
@@ -912,8 +1026,6 @@ typedef struct __TABLE_ITEM_BASIC
 	uint8_t			bySellGroup;		// 33
 
 	uint8_t			byIDK3;				// 34
-	int				byIDK4;				// 35
-	uint32_t		byIDK5;				// 36
 
 } 
 TABLE_ITEM_BASIC;
@@ -1156,10 +1268,6 @@ typedef struct _TB_TABLE_UPC_SKILL
 	int				iValidDist;			//28
 
 	int				iIDK2;				//29
-	int				iIDK3;				//30
-	int				iIDK4;				//31
-	int				iIDK5;				//32
-
 } 
 TABLE_UPC_ATTACK_B;
 
@@ -1336,8 +1444,6 @@ typedef struct _TBL_TABLE_QUEST_TALK
 {
 	uint32_t		dwID;	
 	std::string		szTalk;
-	uint32_t		No1;
-	uint32_t		No2;
 } 
 TABLE_QUEST_TALK;
 
@@ -1462,7 +1568,7 @@ const int	FXID_SWORD_LIGHTNING_TARGET = 10033;
 const int	FXID_SWORD_POISON_MAIN		= 10027;
 const int	FXID_SWORD_POISON_TAIL		= 10028;
 const int	FXID_SWORD_POISON_TARGET	= 10034;
-
+//const int	FXID_GROUND_TARGET = 10035;
 const int	FXID_REGION_TARGET_EL_ROGUE		= 10035;
 const int	FXID_REGION_TARGET_EL_WIZARD	= 10036;
 const int	FXID_REGION_TARGET_EL_PRIEST	= 10037;
@@ -1525,4 +1631,5 @@ enum e_Cursor
 	CURSOR_UNKNOWN = 0xffffffff
 };
 
-#endif 
+#endif // end of #define __GAME_DEF_H_
+

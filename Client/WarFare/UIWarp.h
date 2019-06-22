@@ -1,3 +1,7 @@
+// UIWarp.h: interface for the UIWarp class.
+//
+//////////////////////////////////////////////////////////////////////
+
 #if !defined(AFX_UIWarp_H__27F6610C_5D61_4A22_97F2_93211B77BF9C__INCLUDED_)
 #define AFX_UIWarp_H__27F6610C_5D61_4A22_97F2_93211B77BF9C__INCLUDED_
 
@@ -11,11 +15,11 @@
 
 struct __WarpInfo
 {
-	int iID; 
+	int iID; // 이 번호를 서버에게 날린다.. 
 	std::string szName;
-	std::string szAgreement;
+	std::string szAgreement; // 유저한테 알리고 동의를 구하는 글..
 	int iZone;
-	int iMaxUser; 
+	int iMaxUser; // 최대 제한 인원수..
 	int iGold;
 	__Vector3 vPos;
 };
@@ -49,4 +53,4 @@ public:
 	bool ReceiveMessage(CN3UIBase* pSender, uint32_t dwMsg);
 };
 
-#endif
+#endif // !defined(AFX_UIWarp_H__27F6610C_5D61_4A22_97F2_93211B77BF9C__INCLUDED_)

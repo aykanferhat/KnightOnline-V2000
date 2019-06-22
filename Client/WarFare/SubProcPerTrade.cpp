@@ -77,7 +77,7 @@ void CSubProcPerTrade::InitPerTradeDlg(CUIManager* pUIManager)
 	m_pUIPerTradeDlg = new CUIPerTradeDlg();
 	m_pUIPerTradeDlg->Init(pUIManager);
 	m_pUIPerTradeDlg->m_pSubProcPerTrade = this;
-	m_pUIPerTradeDlg->LoadFromFile(pTbl->Co_PersonalTrade_us);
+	m_pUIPerTradeDlg->LoadFromFile(pTbl->ka_PersonalTrade);
 	rc = m_pUIPerTradeDlg->GetRegion();
 	m_pUIPerTradeDlg->SetPos(iW - (rc.right-rc.left), 10);
 	m_pUIPerTradeDlg->SetVisible(false);	
@@ -88,7 +88,7 @@ void CSubProcPerTrade::InitPerTradeDlg(CUIManager* pUIManager)
 	m_pUITradeEditDlg = new CUITradeEditDlg();
 	m_pUITradeEditDlg->Init(pUIManager);
 	m_pUITradeEditDlg->m_pSubProcPerTrade = this;
-	m_pUITradeEditDlg->LoadFromFile(pTbl->Co_PersonalTradeEdit_us);
+	m_pUITradeEditDlg->LoadFromFile(pTbl->ka_PersonalTradeEdit);
 	m_pUITradeEditDlg->SetStyle(UISTYLE_ALWAYSTOP);
 
 	int iXPos, iYPos;

@@ -1,5 +1,5 @@
 #include "stdafx.h"
-#include "../Server/shared/Ini.h"
+#include "../shared/Ini.h"
 
 int SDL_main(int argc, char** argv)
 {	

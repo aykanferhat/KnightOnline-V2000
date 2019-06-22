@@ -192,7 +192,7 @@ void CUIWareHouseDlg::InitIconWnd(e_UIWND eWnd)
 
 	m_pUITooltipDlg = new CUIImageTooltipDlg();
 	m_pUITooltipDlg->Init(this);
-	m_pUITooltipDlg->LoadFromFile(pTbl->Co_ItemInfo_us);
+	m_pUITooltipDlg->LoadFromFile(pTbl->co_ItemInfo);
 	m_pUITooltipDlg->InitPos();
 	m_pUITooltipDlg->SetVisible(FALSE);	
 

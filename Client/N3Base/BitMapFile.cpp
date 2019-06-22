@@ -3,7 +3,7 @@
 //////////////////////////////////////////////////////////////////////
 
 #include <Windows.h>
-#include "shared/types.h"
+#include "../shared/types.h"
 #include <string>
 #include "BitMapFile.h"
 
